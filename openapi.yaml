@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: Product API
+  description: API for managing products
+  version: 1.0.0
+
+paths:
+  /products:
+    get:
+      summary: Retrieve all products
+      parameters:
+        - in: header
+          name: Accept-Encoding
+          required: false
+          schema:
+            type: string
+            enum: [ gzip ]
+          description: Request compressed response
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /products/{id}:
+    get:
+      summary: Retrieve a specific product by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the product
+          parameters:
+        - in: header
+          name: Accept-Encoding
+          required: false
+          schema:
+            type: string
+            enum: [ gzip ]
+          description: Request compressed response
+      responses:
+        '200':
+          description: A specific product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The product ID
+        description:
+          type: string
+          description: The product description
