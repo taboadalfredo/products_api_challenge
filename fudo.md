@@ -1,4 +1,4 @@
-![Fudo](..\Fudo\images\fudo.png)
+![Fudo](images/fudo.png)
 
 # ¿Qué es un FUDO?
 
