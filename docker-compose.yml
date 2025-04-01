@@ -1,0 +1,19 @@
+services:
+  web:
+    build: .
+    ports:
+      - "4567:4567"
+    depends_on:
+      - redis
+      - consumer
+    environment:
+      REDIS_URL: redis://redis:6379
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  consumer:
+    build: .
+    command: ruby consumers/product_consumer.rb
+    depends_on:
+      - redis
