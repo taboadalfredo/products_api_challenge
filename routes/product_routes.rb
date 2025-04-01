@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+  require 'zlib'
+  require 'stringio'
 
   post '/products' do
     token = request.env['HTTP_AUTHORIZATION']&.split(' ')&.last
@@ -13,12 +15,13 @@
     authenticate!(token)
     id = params[:id]
     product = find(id)
-    product.to_json
+    zip_response(request, response, product)
   end
 
   get '/products' do
     token = request.env['HTTP_AUTHORIZATION']&.split(' ')&.last
     authenticate!(token)
-    products.to_json
+    zip_response(request, response, products)
   end
+
 

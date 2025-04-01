@@ -23,7 +23,9 @@ class Product
     cached_product = CACHE.get(id)
     return JSON.parse(cached_product, symbolize_names: true) if cached_product
     product = PRODUCTS[id]
+    return nil unless product
     CACHE.set(product.id, { id: product.id, description: product.description }.to_json)
+    product
   end
 
   def self.products
