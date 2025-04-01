@@ -6,11 +6,11 @@ require_relative 'config/initializers'
 require_relative 'routes/auth_routes'
 require_relative 'routes/product_routes'
 
-get '/openapi.yml' do
+get '/openapi' do
   response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, proxy-revalidate'
   response.headers['Pragma'] = 'no-cache'
   response.headers['Expires'] = '0'
-  send_file 'openapi.yml'
+  send_file 'openapi.yaml'
 end
 
 get '/AUTHORS' do
